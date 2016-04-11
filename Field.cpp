@@ -25,7 +25,7 @@ void Field::setNumberOfMines(int number)
 }
 
 void Field::generate()
-{
+{   qsrand(9);
     int minesToPlace = m_numberOfMines;
 
     while (minesToPlace > 0) {

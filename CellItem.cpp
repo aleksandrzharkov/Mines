@@ -19,6 +19,8 @@ CellItem::CellItem(Cell *cell) :
     m_text->setFont(f);
 
     setPos(m_cell->x() * cellSize, m_cell->y() * cellSize);
+
+    setAcceptedMouseButtons(Qt::LeftButton);
 }
 
 QRectF CellItem::boundingRect() const
@@ -30,9 +32,7 @@ void CellItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 {
     painter->setRenderHint(QPainter::Antialiasing);
     painter->setRenderHint(QPainter::HighQualityAntialiasing);
-
     painter->drawRect(0, 0, cellSize, cellSize);
-
     static const int border = 4;
     if (m_cell->isOpen()) {
         if (m_cell->haveMine()) {
@@ -42,10 +42,8 @@ void CellItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
         }
     } else {
         painter->fillRect(border, border, cellSize - border * 2, cellSize - border * 2, Qt::lightGray);
-    }
-    m_text->setPos((cellSize - m_text->boundingRect().width()) / 2, (cellSize - m_text->boundingRect().height()) / 2);
+     }
 }
-
 void CellItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     event->accept();
